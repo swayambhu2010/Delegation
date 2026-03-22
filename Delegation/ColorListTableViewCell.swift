@@ -22,7 +22,7 @@ class ColorListTableViewCell: UITableViewCell {
     }
     
     func configure(with color: UIColor) {
-        colorLabel.text = color.description
+        colorLabel.text = "color is \(color)"
         contentView.backgroundColor = color
     }
     

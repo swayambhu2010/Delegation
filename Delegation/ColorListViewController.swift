@@ -23,8 +23,8 @@ class ColorListViewController: UIViewController {
     func tableViewSetup() {
         colorListTableView.dataSource = self
         colorListTableView.delegate = self
-        colorListTableView.register(ColorListTableViewCell.self,
-        forCellReuseIdentifier: ColorListTableViewCell.identifier)
+        let nib = UINib(nibName: "ColorListTableViewCell", bundle: nil)
+        colorListTableView.register(nib, forCellReuseIdentifier: ColorListTableViewCell.identifier)
     }
     
     func colorsDataSource() {
@@ -47,7 +47,6 @@ extension ColorListViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         let color = ColorsDataSource.allCases[indexPath.row]
-        print("color is \(color)")
         cell.configure(with: color.color)
         
         return cell
