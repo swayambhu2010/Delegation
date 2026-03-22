@@ -7,11 +7,16 @@
 
 import UIKit
 
+protocol DisplayColorDelegate: AnyObject {
+    func sendColor(color: UIColor)
+}
+
 class ColorListViewController: UIViewController {
 
     @IBOutlet weak var colorListTableView: UITableView!
     
     var colors: [ColorsDataSource] = []
+    weak var delegate: DisplayColorDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +55,13 @@ extension ColorListViewController: UITableViewDataSource, UITableViewDelegate {
         cell.configure(with: color.color)
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let selectedColor = colors[indexPath.row].color
+        delegate?.sendColor(color: selectedColor)
+        self.navigationController?.popViewController(animated: true)
     }
     
     
